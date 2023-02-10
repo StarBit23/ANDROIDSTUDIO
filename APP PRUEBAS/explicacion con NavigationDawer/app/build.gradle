@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
-    //id 'realm-android'
+    id 'realm-android'
 }
+
+apply plugin: "realm-android"
 
 android {
     compileSdk 32
@@ -33,7 +35,7 @@ android {
 
 
 dependencies {
-    //implementation 'io.realm:realm-gradle-plugin:10.10.1'
+    implementation 'io.realm:realm-gradle-plugin:10.11.1'
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
