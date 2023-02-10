@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preferencias_fichero_login">preferenciasAppPueblos</string>
+    <string name="preferencias_email">preferenciasEmail</string>
+    <string name="preferencias_is_logeado">isLogin</string>
+</resources>
