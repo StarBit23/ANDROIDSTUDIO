@@ -1,8 +1,9 @@
 package com.pmdm.virgen.pueblosconnavigationdraweb.modelos;
 
 
+import io.realm.RealmObject;
 
-public class Juego {
+public class Juego extends RealmObject {
     /**
          * Declaramos constantes con los argumentos que se le pasaránpublic static final String ARGUMENTO_ID = "id";
          * del Main al Dialogo Edición del Juego.public static final String ARGUMENTO_NOMBRE = "nombre";
