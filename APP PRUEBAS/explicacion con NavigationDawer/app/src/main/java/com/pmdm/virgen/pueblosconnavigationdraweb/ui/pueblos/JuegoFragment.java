@@ -36,7 +36,8 @@ import io.realm.RealmResults;
 public class JuegoFragment extends Fragment implements OnJuegoInteractionListener, OnJuegoInteractionDialogListener {
     private static final String TAG = "MiActivity";
     private Realm realm;
-    private RealmResults<Juego> listaJuegos;
+    private List<Juego> listaJuegos;
+    //private RealmResults<Juego> listaJuegos;
     private Context contexto;
     private FloatingActionButton bFlotanteInsertar;
 
@@ -54,7 +55,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     }
 
-    public JuegoFragment(RealmResults<Juego> lista) {
+    public JuegoFragment(List<Juego> lista) {
 
         listaJuegos = lista;
     }
@@ -80,9 +81,9 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
 
     public void crearObjetosDinamicos(){
-        //listaJuegos = new ArrayList<Juego>();
-        listaJuegos = realm.where(Juego.class).findAll();
-        /*
+        listaJuegos = new ArrayList<Juego>();
+        //listaJuegos = realm.where(Juego.class).findAll();
+
         listaJuegos.add(new Juego(0,null, "Super Mario Bros","Plataforma: NES", "40,24 millones"));
         listaJuegos.add(new Juego(1,null, "Super Mario 64", "Plataforma: Nintendo 64", "11,91 millones"));
         listaJuegos.add(new Juego(2,null, "Super Mario Sunshine", "Plataforma: Gamecube", "6,28 millones"));
@@ -96,7 +97,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
         for (int i=0; i<10; i++ )
             Contador.increId();
-        */
+
     }
 
 
@@ -139,10 +140,10 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
         );
 
         // Set the adapter
-  //      if (view instanceof RecyclerView) {
+        // if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = view.findViewById(R.id.lista_pueblos);
-         //   RecyclerView recyclerView = (RecyclerView) view;
+         // RecyclerView recyclerView = (RecyclerView) view;
             miAdaptador = new MyPuebloRecyclerViewAdapter(listaJuegos, this);
             recyclerView.setAdapter(miAdaptador);
    //     }
@@ -188,6 +189,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     @Override
     public void insertarJuego(String nombre, String descripcion, String nVentas) {
+        /*
         realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -205,9 +207,9 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
             public void onError(Throwable error) {
                 realm.close();
             }
-        });
-        //Contador.increId();
-        //listaJuegos.add(new Juego( Contador.dameId(),null,nombre, descripcion, nVentas));
+        });*/
+        Contador.increId();
+        listaJuegos.add(new Juego( Contador.dameId(),null,nombre, descripcion, nVentas));
     }
 
     @Override

@@ -20,10 +20,10 @@ import io.realm.RealmResults;
 
 public class MyPuebloRecyclerViewAdapter extends RecyclerView.Adapter<MyPuebloRecyclerViewAdapter.ViewPueblo> {
 
-    private final RealmResults<Juego> mValues;
+    private final List<Juego> mValues;
     private OnJuegoInteractionListener listenerPueblo;
 
-    public MyPuebloRecyclerViewAdapter(RealmResults<Juego> items, OnJuegoInteractionListener listener) {
+    public MyPuebloRecyclerViewAdapter(List<Juego> items, OnJuegoInteractionListener listener) {
         mValues = items;
         listenerPueblo = listener;
     }

@@ -29,12 +29,8 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-    private RealmResults<Juego> listaJuego;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private Fragment f = null;
-    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
