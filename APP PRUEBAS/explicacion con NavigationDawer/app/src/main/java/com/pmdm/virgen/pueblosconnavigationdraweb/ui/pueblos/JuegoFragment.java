@@ -1,6 +1,7 @@
 package com.pmdm.virgen.pueblosconnavigationdraweb.ui.pueblos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pmdm.virgen.pueblosconnavigationdraweb.DetalleJuegoActivity;
 import com.pmdm.virgen.pueblosconnavigationdraweb.MainActivity;
 import com.pmdm.virgen.pueblosconnavigationdraweb.R;
 import com.pmdm.virgen.pueblosconnavigationdraweb.adapter.MyPuebloRecyclerViewAdapter;
@@ -156,7 +158,9 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     @Override
     public void onJuegoClick(Juego juego) {
-
+        Intent intentDetalles = new Intent(this.contexto, DetalleJuegoActivity.class);
+        intentDetalles.putExtra(juego.ARGUMENTO_ID, juego.getId());
+        startActivity(intentDetalles);
     }
 
 
@@ -214,6 +218,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     @Override
     public void editarJuego(long id, String nombre, String descripcion, String nVentas) {
+        /*
         realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -236,8 +241,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
             public void onError(Throwable error) {
                 realm.close();
             }
-        });
-        /*
+        });*/
         int i=0;
         Juego aux=null;
         int tam = listaJuegos.size();
@@ -256,8 +260,6 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
             actualizaAdaptador();
         }else
             Toast.makeText (contexto, "Se ha producido algun error", Toast.LENGTH_SHORT).show();
-       */
-
 
     }
 

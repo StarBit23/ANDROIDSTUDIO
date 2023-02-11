@@ -89,11 +89,7 @@ public class MyPuebloRecyclerViewAdapter extends RecyclerView.Adapter<MyPuebloRe
                     }
             );
 
-            imageViewBorrarPueblo.setOnClickListener(
-                    (evento)->{
-                        listenerPueblo.onJuegoBorrarClick(mItem);
-                    }
-            );
+            vista.setOnClickListener(v -> listenerPueblo.onJuegoClick(mItem));
 
 
            // vista.setOnClickListener();
