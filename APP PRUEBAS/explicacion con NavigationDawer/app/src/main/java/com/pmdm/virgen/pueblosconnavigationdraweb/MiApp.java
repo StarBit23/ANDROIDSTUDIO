@@ -9,9 +9,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 public class MiApp extends Application {
-    public static AtomicLong IdPueblo = new AtomicLong();
+    public static AtomicLong IdJuego = new AtomicLong();
 
     @Override
     public void onCreate() {
@@ -19,7 +21,7 @@ public class MiApp extends Application {
 
         inicializarRealm(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
-        IdPueblo = dameUltimoId(realm, Juego.class);
+        IdJuego = dameUltimoId(realm, Juego.class);
         realm.close();
     }
 
@@ -37,8 +39,11 @@ public class MiApp extends Application {
         Realm.setDefaultConfiguration(config);
     }
 
-    private AtomicLong dameUltimoId(Realm realm, Class<Juego> juegoClass) {
-
-        return null;
+    private <T extends RealmObject> AtomicLong dameUltimoId(Realm realm, Class<T> clase){
+        RealmResults resutados = realm.where(clase).findAll();
+        if (resutados.size() > 0)
+            return  new AtomicLong(resutados.max("id").intValue());
+        else
+            return new AtomicLong();
     }
 }

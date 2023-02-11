@@ -1,6 +1,8 @@
 package com.pmdm.virgen.pueblosconnavigationdraweb.modelos;
 
 
+import com.pmdm.virgen.pueblosconnavigationdraweb.MiApp;
+
 import io.realm.RealmObject;
 
 public class Juego extends RealmObject {
@@ -28,7 +30,8 @@ public class Juego extends RealmObject {
     }
 
     public Juego(long id, String urlFoto, String nombre, String descripcion, String numVentas) {
-        this.id = id;
+        //this.id = id;
+        this.id = MiApp.IdJuego.incrementAndGet();
         this.urlFoto = urlFoto;
         this.nombre = nombre;
         this.descripcion = descripcion;

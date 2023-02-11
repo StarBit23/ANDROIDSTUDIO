@@ -25,17 +25,23 @@ import com.pmdm.virgen.pueblosconnavigationdraweb.modelos.Juego;
 import com.pmdm.virgen.pueblosconnavigationdraweb.varios.Contador;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 
 public class JuegoFragment extends Fragment implements OnJuegoInteractionListener, OnJuegoInteractionDialogListener {
     private static final String TAG = "MiActivity";
-    private List<Juego> listaJuegos;
+    private Realm realm;
+    private RealmResults<Juego> listaJuegos;
     private Context contexto;
     private FloatingActionButton bFlotanteInsertar;
 
 
-  //  private OnJuegoInteractionListener listener;
+    //private OnJuegoInteractionListener listener;
     private MyPuebloRecyclerViewAdapter miAdaptador;
 
 
@@ -48,7 +54,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     }
 
-    public JuegoFragment(List<Juego> lista) {
+    public JuegoFragment(RealmResults<Juego> lista) {
 
         listaJuegos = lista;
     }
@@ -58,8 +64,8 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         /*
+
        listaJuegos = new ArrayList<Juego>();
 
         listaJuegos.add(new Juego(null, "Socuellamos","Juego de Ciudad Read", 12000));
@@ -74,8 +80,9 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
 
     public void crearObjetosDinamicos(){
-        listaJuegos = new ArrayList<Juego>();
-
+        //listaJuegos = new ArrayList<Juego>();
+        listaJuegos = realm.where(Juego.class).findAll();
+        /*
         listaJuegos.add(new Juego(0,null, "Super Mario Bros","Plataforma: NES", "40,24 millones"));
         listaJuegos.add(new Juego(1,null, "Super Mario 64", "Plataforma: Nintendo 64", "11,91 millones"));
         listaJuegos.add(new Juego(2,null, "Super Mario Sunshine", "Plataforma: Gamecube", "6,28 millones"));
@@ -89,6 +96,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
         for (int i=0; i<10; i++ )
             Contador.increId();
+        */
     }
 
 
@@ -168,8 +176,6 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
     }
 
     @Override
-
-
     public void onJuegoBorrarClick(Juego juego) {
         //Toast.makeText(this, "Borrado: "+juego.toString(), Toast.LENGTH_SHORT).show();
         Log.i(TAG, "Borrado: "+ juego.toString());
@@ -182,12 +188,54 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
 
     @Override
     public void insertarJuego(String nombre, String descripcion, String nVentas) {
-        Contador.increId();
-        listaJuegos.add(new Juego( Contador.dameId(),null,nombre, descripcion, nVentas));
+        realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Juego juego = new Juego(0, null, nombre, descripcion, nVentas);
+                realm.copyToRealm(juego);
+            }
+            }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+            }
+            }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                realm.close();
+            }
+        });
+        //Contador.increId();
+        //listaJuegos.add(new Juego( Contador.dameId(),null,nombre, descripcion, nVentas));
     }
 
     @Override
     public void editarJuego(long id, String nombre, String descripcion, String nVentas) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Juego juego = new Juego();
+                juego.setId(id);
+                juego.setNombre(nombre);
+                juego.setDescripcion(descripcion);
+                juego.setNumVentas(nVentas);
+                juego.setUrlFoto(null);
+                realm.copyToRealmOrUpdate(juego);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                realm.close();
+            }
+        });
+        /*
         int i=0;
         Juego aux=null;
         int tam = listaJuegos.size();
@@ -206,7 +254,7 @@ public class JuegoFragment extends Fragment implements OnJuegoInteractionListene
             actualizaAdaptador();
         }else
             Toast.makeText (contexto, "Se ha producido algun error", Toast.LENGTH_SHORT).show();
-
+       */
 
 
     }
