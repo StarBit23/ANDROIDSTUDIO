@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "791586716970",
+    "project_id": "worldserpent-c7de8",
+    "storage_bucket": "worldserpent-c7de8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791586716970:android:debd0279f4b09b84bfb253",
+        "android_client_info": {
+          "package_name": "com.pmdm.virgen.pueblosconnavigationdraweb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791586716970-b2u6f9t3rfoqtopgr0rer2d4op0oupm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdC2KGk13xCDd9zPSjfjIhkQQfh5If9o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791586716970-b2u6f9t3rfoqtopgr0rer2d4op0oupm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
